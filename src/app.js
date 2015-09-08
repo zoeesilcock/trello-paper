@@ -4,6 +4,10 @@ import React from 'react';
 import Reflux from 'reflux';
 
 const App = React.createClass({
+  componentDidMount() {
+    Trello.authorize({ name: 'Trello Paper' });
+  },
+
   render() {
     return (
       <div>
