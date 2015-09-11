@@ -1,5 +1,7 @@
 import Reflux from 'reflux';
 import Actions from '../actions/organizations_actions';
+import BoardsActions from '../actions/boards_actions';
+
 var Storage = window.localStorage;
 
 var Store = Reflux.createStore({
@@ -30,28 +32,28 @@ var Store = Reflux.createStore({
 
   onLoad() {
     this.loadOrganizations();
-    this.current = this.loadCurrent();
   },
 
   onPick(id) {
     this.current = this.getOrganization(id);
     this.commitCurrent();
     this.trigger();
+
+    BoardsActions.load();
   },
 
   loadOrganizations() {
     Trello.get('/members/me/organizations', (data) => {
       this.organizations = data;
-      this.current = this.loadCurrent();
+      this.onPick(this.loadCurrentId());
       this.trigger();
     }, (error) => {
       console.log(error);
     });
   },
 
-  loadCurrent() {
-    var id = Storage.getItem('current_organization');
-    return this.getOrganization(id);
+  loadCurrentId() {
+    return Storage.getItem('current_organization');
   },
 
   commitCurrent() {
