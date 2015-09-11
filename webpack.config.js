@@ -1,4 +1,6 @@
+require('dotenv').load();
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -22,5 +24,10 @@ module.exports = {
       ],
       exclude: path.join(__dirname, 'node_modules')
     } ]
-  }
+  },
+  plugins: [
+    new webpack.EnvironmentPlugin([
+      'TRELLO_API_KEY'
+    ])
+  ]
 };

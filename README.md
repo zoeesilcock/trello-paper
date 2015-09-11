@@ -10,6 +10,11 @@ Use this to install them:
 npm install
 ```
 
+Trello API key
+--------------
+Head over to [trello](https://trello.com/app-key) and grab your API key.
+Make a .env file and add your key to it under ```TRELLO_API_KEY```.
+
 Building and running
 --------------------
 
