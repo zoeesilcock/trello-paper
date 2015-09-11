@@ -3,16 +3,46 @@ require('./styles/main.scss');
 import React from 'react';
 import Reflux from 'reflux';
 
+import Organizations from './components/organizations';
+
+import OrganizationsActions from './actions/organizations_actions';
+
+import OrganizationsStore from './stores/organizations_store';
+
 const App = React.createClass({
   componentDidMount() {
-    Trello.authorize({ name: 'Trello Paper' });
+    Trello.setKey(process.env.TRELLO_API_KEY);
+    Trello.authorize({ name: 'Trello Paper', success: this.authorized });
+    OrganizationsStore.listen(this.onOrganizationsChange);
+  },
+
+  authorized() {
+    OrganizationsActions.load();
+  },
+
+  getInitialState() {
+    return {
+      organizations: OrganizationsStore.getOrganizations(),
+      current_organization: OrganizationsStore.getCurrentOrganization()
+    };
+  },
+
+  onBoardsChange() {
+    this.setState({ boards: BoardsStore.getBoards() });
+  },
+
+  onOrganizationsChange() {
+    this.setState({
+      organizations: OrganizationsStore.getOrganizations(),
+      current_organization: OrganizationsStore.getCurrentOrganization()
+    });
   },
 
   render() {
     return (
       <div>
         <h1>Trello Paper</h1>
-        <p>Hello world!</p>
+        <Organizations organizations={this.state.organizations} current={this.state.current_organization.id} />
         <a href="https://github.com/zoeesilcock/trello-paper" target="blank" className="github"><img src="images/github_mark.png" />github</a>
       </div>
     );
