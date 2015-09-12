@@ -1,0 +1,41 @@
+@import "variables";
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 120px;
+
+  .flex-column {
+    flex: 1 0 0;
+    min-width: 200px;
+    min-height: 100%;
+    border-right: 1px solid $dark;
+    overflow: scroll;
+
+    h2 {
+      border-bottom: 1px solid $dark;
+      margin: 0;
+      padding: 10px;
+    }
+  }
+}
+
+.miller-column {
+  width: 100%;
+  margin: 0;
+
+  li {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid $light;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

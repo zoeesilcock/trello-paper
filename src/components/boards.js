@@ -14,9 +14,12 @@ class Boards extends React.Component {
     });
 
     return (
-      <ul>
-        {boards}
-      </ul>
+      <div className="flex-column">
+        <h2>Boards</h2>
+        <ul className="miller-column">
+          {boards}
+        </ul>
+      </div>
     );
   }
 }

@@ -48,7 +48,15 @@ const App = React.createClass({
       <div>
         <h1>Trello Paper</h1>
         <Organizations organizations={this.state.organizations} current={this.state.current_organization.id} />
-        <Boards boards={this.state.boards} />
+        <div className="flex-container">
+          <Boards boards={this.state.boards} />
+          <div className="flex-column">
+            <h2>Lists</h2>
+          </div>
+          <div className="flex-column">
+            <h2>Cards</h2>
+          </div>
+        </div>
         <a href="https://github.com/zoeesilcock/trello-paper" target="blank" className="github"><img src="images/github_mark.png" />github</a>
       </div>
     );
