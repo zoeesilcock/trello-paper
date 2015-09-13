@@ -16,7 +16,7 @@ class Cards extends React.Component {
     });
 
     return (
-      <div className="flex-column">
+      <div className="flex-column cards">
         <button onClick={this.backHandler}className="back">&lang;</button>
         <h2>Cards</h2>
         <ul className="miller-column">

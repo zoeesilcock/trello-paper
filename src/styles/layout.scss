@@ -7,7 +7,7 @@
   bottom: 0;
   top: 120px;
 
-  @media (max-width: 600px) {
+  @media (max-width: $break-point) {
     overflow: hidden;
   }
 }
@@ -19,11 +19,11 @@
   align-items: stretch;
   height: 100%;
 
-  @media (max-width: 600px) {
+  @media (max-width: $break-point) {
     width: 300%;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: $break-point) {
     width: 100%;
     left: 0!important;
   }
@@ -35,13 +35,19 @@
     min-height: 100%;
     border-right: 1px solid $dark;
 
+    &.cards {
+      @media (min-width: $break-point) {
+        flex: 2 0 0;
+      }
+    }
+
     .back {
       position: absolute;
       left: 10px;
       padding-left: 8px;
       cursor: pointer;
 
-      @media (min-width: 600px) {
+      @media (min-width: $break-point) {
         display: none;
       }
     }

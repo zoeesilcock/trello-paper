@@ -10,7 +10,7 @@ class Boards extends React.Component {
     });
 
     return (
-      <div className="flex-column">
+      <div className="flex-column boards">
         <h2>Boards</h2>
         <ul className="miller-column">
           {boards}
