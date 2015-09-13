@@ -3,14 +3,17 @@ require('./styles/main.scss');
 import React from 'react';
 import Reflux from 'reflux';
 
-import Boards from './components/boards';
 import Organizations from './components/organizations';
+import Boards from './components/boards';
+import Lists from './components/lists';
 
-import BoardsActions from './actions/boards_actions';
 import OrganizationsActions from './actions/organizations_actions';
+import BoardsActions from './actions/boards_actions';
+import ListsActions from './actions/lists_actions';
 
-import BoardsStore from './stores/boards_store';
 import OrganizationsStore from './stores/organizations_store';
+import BoardsStore from './stores/boards_store';
+import ListsStore from './stores/lists_store';
 
 const App = React.createClass({
   componentDidMount() {
@@ -18,6 +21,7 @@ const App = React.createClass({
     Trello.authorize({ name: 'Trello Paper', success: this.authorized });
     OrganizationsStore.listen(this.onOrganizationsChange);
     BoardsStore.listen(this.onBoardsChange);
+    ListsStore.listen(this.onListsChange);
   },
 
   authorized() {
@@ -28,12 +32,9 @@ const App = React.createClass({
     return {
       organizations: OrganizationsStore.getOrganizations(),
       current_organization: OrganizationsStore.getCurrentOrganization(),
-      boards: BoardsStore.getBoards()
+      boards: BoardsStore.getBoards(),
+      lists: ListsStore.getLists()
     };
-  },
-
-  onBoardsChange() {
-    this.setState({ boards: BoardsStore.getBoards() });
   },
 
   onOrganizationsChange() {
@@ -43,6 +44,14 @@ const App = React.createClass({
     });
   },
 
+  onBoardsChange() {
+    this.setState({ boards: BoardsStore.getBoards() });
+  },
+
+  onListsChange() {
+    this.setState({ lists: ListsStore.getLists() });
+  },
+
   render() {
     return (
       <div>
@@ -50,9 +59,7 @@ const App = React.createClass({
         <Organizations organizations={this.state.organizations} current={this.state.current_organization.id} />
         <div className="flex-container">
           <Boards boards={this.state.boards} />
-          <div className="flex-column">
-            <h2>Lists</h2>
-          </div>
+          <Lists lists={this.state.lists} />
           <div className="flex-column">
             <h2>Cards</h2>
           </div>

@@ -1,8 +1,7 @@
 import Reflux from 'reflux';
 
 var Actions = Reflux.createActions([
-  'load',
-  'pick'
+  'load'
 ]);
 
 export default Actions;

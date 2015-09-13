@@ -10,7 +10,7 @@ class Boards extends React.Component {
     var boards = [];
 
     this.props.boards.map((board, index) => {
-      boards.push(<Board key={index} index={index} name={board.name} />);
+      boards.push(<Board key={index} index={index} id={board.id} name={board.name} />);
     });
 
     return (
