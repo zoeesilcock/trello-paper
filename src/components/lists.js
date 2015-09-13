@@ -10,7 +10,7 @@ class Lists extends React.Component {
     var lists = [];
 
     this.props.lists.map((list, index) => {
-      lists.push(<List key={index} index={index} name={list.name} />);
+      lists.push(<List key={index} index={index} id={list.id} name={list.name} />);
     });
 
     return (
