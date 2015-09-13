@@ -1,12 +1,6 @@
 import React from 'react';
 
 class Card extends React.Component {
-  propTypes: {
-    id: React.PropTyles.number.isRequired,
-    name: React.PropTypes.string.isRequired,
-    print: React.PropTypes.bool
-  }
-
   render() {
     return (
       <li>
@@ -14,6 +8,12 @@ class Card extends React.Component {
       </li>
     );
   }
+};
+
+Card.propTypes = {
+  id: React.PropTypes.string.isRequired,
+  name: React.PropTypes.string.isRequired,
+  print: React.PropTypes.bool
 };
 
 Card.defaultProps = { print: true };

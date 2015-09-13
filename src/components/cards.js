@@ -2,10 +2,6 @@ import React from 'react';
 import Card from './card';
 
 class Cards extends React.Component {
-  propTypes: {
-    cards: React.PropTypes.array.isRequired
-  }
-
   render() {
     var cards = [];
 
@@ -23,5 +19,9 @@ class Cards extends React.Component {
     );
   }
 }
+
+Cards.propTypes = {
+  cards: React.PropTypes.array.isRequired
+};
 
 export default Cards;

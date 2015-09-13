@@ -2,10 +2,6 @@ import React from 'react';
 import Board from './board';
 
 class Boards extends React.Component {
-  propTypes: {
-    boards: React.PropTypes.array.isRequired
-  }
-
   render() {
     var boards = [];
 
@@ -23,5 +19,9 @@ class Boards extends React.Component {
     );
   }
 }
+
+Boards.propTypes = {
+  boards: React.PropTypes.array.isRequired
+};
 
 export default Boards;

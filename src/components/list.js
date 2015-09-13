@@ -5,11 +5,6 @@ import Actions from '../actions/lists_actions';
 import Store from '../stores/lists_store';
 
 class List extends React.Component {
-  propTypes: {
-    id: React.PropTyles.number.isRequired,
-    name: React.PropTypes.string.isRequired
-  }
-
   handleClick(event) {
     Actions.pick(this.props.id);
   }
@@ -24,6 +19,11 @@ class List extends React.Component {
       </li>
     );
   }
+};
+
+List.propTypes = {
+  id: React.PropTypes.string.isRequired,
+  name: React.PropTypes.string.isRequired
 };
 
 export default List;

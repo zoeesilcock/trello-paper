@@ -3,11 +3,6 @@ import Organization from './organization';
 import Actions from '../actions/organizations_actions';
 
 class Organizations extends React.Component {
-  propTypes: {
-    organizations: React.PropTypes.array.isRequired,
-    current: React.PropTypes.number
-  }
-
   handleChange(event) {
     Actions.pick(event.target.value);
   }
@@ -27,5 +22,10 @@ class Organizations extends React.Component {
     );
   }
 }
+
+Organizations.propTypes = {
+  organizations: React.PropTypes.array.isRequired,
+  current: React.PropTypes.string
+};
 
 export default Organizations;

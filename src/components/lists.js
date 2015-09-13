@@ -2,10 +2,6 @@ import React from 'react';
 import List from './list';
 
 class Lists extends React.Component {
-  propTypes: {
-    boards: React.PropTypes.array.isRequired
-  }
-
   render() {
     var lists = [];
 
@@ -22,6 +18,10 @@ class Lists extends React.Component {
       </div>
     );
   }
+}
+
+Lists.propTypes = {
+  lists: React.PropTypes.array.isRequired
 }
 
 export default Lists;

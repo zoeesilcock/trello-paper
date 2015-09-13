@@ -5,11 +5,6 @@ import Actions from '../actions/boards_actions';
 import Store from '../stores/boards_store';
 
 class Board extends React.Component {
-  propTypes: {
-    id: React.PropTypes.number.isRequired,
-    name: React.PropTypes.string.isRequired
-  }
-
   handleClick(event) {
     Actions.pick(this.props.id);
   }
@@ -24,6 +19,11 @@ class Board extends React.Component {
       </li>
     );
   }
+};
+
+Board.propTypes = {
+  id: React.PropTypes.string.isRequired,
+  name: React.PropTypes.string.isRequired
 };
 
 export default Board;
