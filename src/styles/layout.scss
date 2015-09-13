@@ -70,10 +70,12 @@
   padding-bottom: 120px;
 
   li {
+    position: relative;
     text-align: left;
-    padding: 10px;
+    padding: 10px 20px 10px 10px;
     border-bottom: 1px solid $light;
     cursor: pointer;
+    list-style-position: inside;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -83,7 +85,8 @@
     }
 
     .chevron {
-      float: right;
+      position: absolute;
+      right: 0;
       font-weight: bold;
     }
   }
