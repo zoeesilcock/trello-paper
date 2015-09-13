@@ -6,14 +6,17 @@ import Reflux from 'reflux';
 import Organizations from './components/organizations';
 import Boards from './components/boards';
 import Lists from './components/lists';
+import Cards from './components/cards';
 
 import OrganizationsActions from './actions/organizations_actions';
 import BoardsActions from './actions/boards_actions';
 import ListsActions from './actions/lists_actions';
+import CardsActions from './actions/cards_actions';
 
 import OrganizationsStore from './stores/organizations_store';
 import BoardsStore from './stores/boards_store';
 import ListsStore from './stores/lists_store';
+import CardsStore from './stores/cards_store';
 
 const App = React.createClass({
   componentDidMount() {
@@ -22,6 +25,7 @@ const App = React.createClass({
     OrganizationsStore.listen(this.onOrganizationsChange);
     BoardsStore.listen(this.onBoardsChange);
     ListsStore.listen(this.onListsChange);
+    CardsStore.listen(this.onCardsChange);
   },
 
   authorized() {
@@ -33,7 +37,8 @@ const App = React.createClass({
       organizations: OrganizationsStore.getOrganizations(),
       current_organization: OrganizationsStore.getCurrentOrganization(),
       boards: BoardsStore.getBoards(),
-      lists: ListsStore.getLists()
+      lists: ListsStore.getLists(),
+      cards: CardsStore.getCards()
     };
   },
 
@@ -52,6 +57,10 @@ const App = React.createClass({
     this.setState({ lists: ListsStore.getLists() });
   },
 
+  onCardsChange() {
+    this.setState({ cards: CardsStore.getCards() });
+  },
+
   render() {
     return (
       <div>
@@ -60,9 +69,7 @@ const App = React.createClass({
         <div className="flex-container">
           <Boards boards={this.state.boards} />
           <Lists lists={this.state.lists} />
-          <div className="flex-column">
-            <h2>Cards</h2>
-          </div>
+          <Cards cards={this.state.cards} />
         </div>
         <a href="https://github.com/zoeesilcock/trello-paper" target="blank" className="github"><img src="images/github_mark.png" />github</a>
       </div>

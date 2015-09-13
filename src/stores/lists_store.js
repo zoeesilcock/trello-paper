@@ -2,6 +2,7 @@ import Reflux from 'reflux';
 import Actions from '../actions/lists_actions';
 
 import BoardsStore from './boards_store';
+import CardsActions from '../actions/cards_actions';
 
 var Storage = window.localStorage;
 
@@ -39,6 +40,8 @@ var Store = Reflux.createStore({
     this.current = this.getList(id);
     this.commitCurrent();
     this.trigger();
+
+    CardsActions.load();
   },
 
   loadLists() {
@@ -46,6 +49,7 @@ var Store = Reflux.createStore({
 
     Trello.get('boards/' + current_board.id + '/lists', (data) => {
       this.lists = data;
+      this.onPick(this.loadCurrentId());
       this.trigger();
     }, (error) => {
       console.log(error);

@@ -2,7 +2,7 @@ import Reflux from 'reflux';
 import Actions from '../actions/boards_actions';
 import OrganizationsStore from './organizations_store';
 
-import ListActions from '../actions/lists_actions';
+import ListsActions from '../actions/lists_actions';
 
 var Storage = window.localStorage;
 
@@ -41,7 +41,7 @@ var Store = Reflux.createStore({
     this.commitCurrent();
     this.trigger();
 
-    ListActions.load();
+    ListsActions.load();
   },
 
   loadBoards() {
