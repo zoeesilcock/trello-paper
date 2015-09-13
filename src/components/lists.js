@@ -1,7 +1,13 @@
 import React from 'react';
 import List from './list';
 
+import ScrollActions from '../actions/scroll_actions';
+
 class Lists extends React.Component {
+  backHandler(event) {
+    ScrollActions.back();
+  }
+
   render() {
     var lists = [];
 
@@ -11,6 +17,7 @@ class Lists extends React.Component {
 
     return (
       <div className="flex-column">
+        <button onClick={this.backHandler}className="back">&lang;</button>
         <h2>Lists</h2>
         <ul className="miller-column">
           {lists}

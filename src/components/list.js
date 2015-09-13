@@ -2,11 +2,13 @@ import React from 'react';
 import classNames from 'classnames';
 
 import Actions from '../actions/lists_actions';
+import ScrollActions from '../actions/scroll_actions';
 import Store from '../stores/lists_store';
 
 class List extends React.Component {
   handleClick(event) {
     Actions.pick(this.props.id);
+    ScrollActions.next();
   }
 
   render() {

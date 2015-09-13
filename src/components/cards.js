@@ -1,7 +1,13 @@
 import React from 'react';
 import Card from './card';
 
+import ScrollActions from '../actions/scroll_actions';
+
 class Cards extends React.Component {
+  backHandler(event) {
+    ScrollActions.back();
+  }
+
   render() {
     var cards = [];
 
@@ -11,6 +17,7 @@ class Cards extends React.Component {
 
     return (
       <div className="flex-column">
+        <button onClick={this.backHandler}className="back">&lang;</button>
         <h2>Cards</h2>
         <ul className="miller-column">
           {cards}
