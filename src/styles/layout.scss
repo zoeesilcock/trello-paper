@@ -38,6 +38,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 
+    &.active {
+      background: $light;
+    }
+
     .chevron {
       float: right;
       font-weight: bold;
