@@ -47,13 +47,18 @@ var Store = Reflux.createStore({
   loadBoards() {
     var current_organization = OrganizationsStore.getCurrentOrganization();
 
-    Trello.get('organizations/' + current_organization.name + '/boards', (data) => {
-      this.boards = data;
-      this.onPick(this.loadCurrentId());
+    if (current_organization.name !== undefined) {
+      Trello.get('organizations/' + current_organization.name + '/boards', (data) => {
+        this.boards = data;
+        this.onPick(this.loadCurrentId());
+        this.trigger();
+      }, (error) => {
+        console.log(error);
+      });
+    } else {
+      this.boards = [];
       this.trigger();
-    }, (error) => {
-      console.log(error);
-    });
+    }
   },
 
   loadCurrentId() {

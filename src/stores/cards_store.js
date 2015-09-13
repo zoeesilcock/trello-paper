@@ -33,12 +33,17 @@ var Store = Reflux.createStore({
   loadCards() {
     var current_list = ListsStore.getCurrentList();
 
-    Trello.get('lists/' + current_list.id + '/cards', (data) => {
-      this.cards = data;
+    if (current_list.id !== undefined) {
+      Trello.get('lists/' + current_list.id + '/cards', (data) => {
+        this.cards = data;
+        this.trigger();
+      }, (error) => {
+        console.log(error);
+      });
+    } else {
+      this.cards = [];
       this.trigger();
-    }, (error) => {
-      console.log(error);
-    });
+    }
   }
 });
 
