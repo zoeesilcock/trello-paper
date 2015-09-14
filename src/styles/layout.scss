@@ -41,7 +41,7 @@
       }
     }
 
-    .back {
+    .back-button {
       position: absolute;
       left: 10px;
       padding-left: 8px;
@@ -50,6 +50,12 @@
       @media (min-width: $break-point) {
         display: none;
       }
+    }
+
+    .print-button {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
     }
 
     h2 {

@@ -17,7 +17,7 @@ class Lists extends React.Component {
 
     return (
       <div className="flex-column lists">
-        <button onClick={this.backHandler}className="back">&lang;</button>
+        <button onClick={this.backHandler}className="back-button">&lang;</button>
         <h2>Lists</h2>
         <ul className="miller-column">
           {lists}

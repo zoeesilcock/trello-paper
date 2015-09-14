@@ -8,6 +8,10 @@ class Cards extends React.Component {
     ScrollActions.back();
   }
 
+  printHandler(event) {
+    window.print();
+  }
+
   render() {
     var cards = [];
 
@@ -17,7 +21,8 @@ class Cards extends React.Component {
 
     return (
       <div className="flex-column cards">
-        <button onClick={this.backHandler}className="back">&lang;</button>
+        <button onClick={this.backHandler} className="back-button">&lang;</button>
+        <button onClick={this.printHandler} className="print-button">print</button>
         <h2>Cards</h2>
         <ul className="miller-column">
           {cards}

@@ -1,0 +1,36 @@
+@import "variables";
+
+@media print {
+  .web {
+    display: none;
+  }
+
+  .print {
+    input {
+      display: none;
+    }
+
+    ul li {
+      border-bottom: 1px dashed $dark;
+      padding: 40px 0;
+
+      .name {
+        font-size: 24px;
+      }
+
+      .description {
+        font-size: 1em;
+        line-height: 1em;
+        max-height: 2em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+@media screen {
+  .print {
+    display: none;
+  }
+}

@@ -7,6 +7,7 @@ import Organizations from './components/organizations';
 import Boards from './components/boards';
 import Lists from './components/lists';
 import Cards from './components/cards';
+import Print from './components/print';
 
 import OrganizationsActions from './actions/organizations_actions';
 import BoardsActions from './actions/boards_actions';
@@ -76,16 +77,19 @@ const App = React.createClass({
   render() {
     return (
       <div>
-        <h1>Trello Paper</h1>
-        <Organizations organizations={this.state.organizations} current={this.state.current_organization.id} />
-        <div className="flex-scroll" ref="scroll">
-          <div className="flex-container" ref="container">
-            <Boards boards={this.state.boards} />
-            <Lists lists={this.state.lists} />
-            <Cards cards={this.state.cards} />
+        <div className="web">
+          <h1>Trello Paper</h1>
+          <Organizations organizations={this.state.organizations} current={this.state.current_organization.id} />
+          <div className="flex-scroll" ref="scroll">
+            <div className="flex-container" ref="container">
+              <Boards boards={this.state.boards} />
+              <Lists lists={this.state.lists} />
+              <Cards cards={this.state.cards} />
+            </div>
           </div>
+          <a href="https://github.com/zoeesilcock/trello-paper" target="blank" className="github"><img src="images/github_mark.png" />github</a>
         </div>
-        <a href="https://github.com/zoeesilcock/trello-paper" target="blank" className="github"><img src="images/github_mark.png" />github</a>
+        <Print cards={this.state.cards} />
       </div>
     );
   }
