@@ -16,7 +16,7 @@ class Cards extends React.Component {
     var cards = [];
 
     this.props.cards.map((card, index) => {
-      cards.push(<Card key={index} index={index} id={card.id} name={card.name} />);
+      cards.push(<Card key={index} index={index} id={card.id} name={card.name} print={card.print} />);
     });
 
     return (

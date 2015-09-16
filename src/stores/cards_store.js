@@ -9,6 +9,7 @@ var Store = Reflux.createStore({
 
   init() {
     this.cards = [];
+    this.cardStates = {};
     this.current = {};
   },
 
@@ -30,12 +31,18 @@ var Store = Reflux.createStore({
     this.loadCards();
   },
 
+  onChange(id, checked) {
+    this.cardStates[id] = checked;
+    this.commitCardStates();
+  },
+
   loadCards() {
     var current_list = ListsStore.getCurrentList();
 
     if (current_list.id !== undefined) {
       Trello.get('lists/' + current_list.id + '/cards', (data) => {
         this.cards = data;
+        this.loadCardStates();
         this.trigger();
       }, (error) => {
         console.log(error);
@@ -44,6 +51,22 @@ var Store = Reflux.createStore({
       this.cards = [];
       this.trigger();
     }
+  },
+
+  loadCardStates() {
+    var data = Storage.getItem('card_states');
+
+    if (data !== 'undefined') {
+      this.cardStates = JSON.parse(data);
+    }
+
+    for (var i = 0; i < this.cards.length; i++) {
+      this.cards[i].print = this.cardStates[this.cards[i].id];
+    }
+  },
+
+  commitCardStates() {
+    Storage.setItem('card_states', JSON.stringify(this.cardStates));
   }
 });
 

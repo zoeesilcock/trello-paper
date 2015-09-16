@@ -1,10 +1,15 @@
 import React from 'react';
+import Actions from '../actions/cards_actions';
 
 class Card extends React.Component {
+  handleChange(event) {
+    Actions.change(this.props.id, event.target.checked);
+  }
+
   render() {
     return (
       <li>
-        <span><input type="checkbox" defaultChecked={this.props.print} /> {this.props.name}</span>
+        <span><input type="checkbox" defaultChecked={this.props.print} onChange={this.handleChange.bind(this)} /> {this.props.name}</span>
       </li>
     );
   }
