@@ -11,11 +11,18 @@
     }
 
     ul li {
-      border-bottom: 1px dashed $dark;
       padding: 40px 0;
+      border-bottom: 1px dashed $dark;
+      page-break-inside: avoid;
+
+      .content {
+        width: 80%;
+        margin: 0 auto;
+      }
 
       .name {
         font-size: 24px;
+        font-weight: bold;
       }
 
       .description {

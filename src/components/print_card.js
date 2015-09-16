@@ -4,8 +4,10 @@ class PrintCard extends React.Component {
   render() {
     return (
       <li>
-        <p className="name">{this.props.name}</p>
-        <p className="description">{this.props.description}</p>
+        <div className="content">
+          <p className="name">{this.props.name}</p>
+          <p className="description">{this.props.description}</p>
+        </div>
       </li>
     );
   }
