@@ -1,6 +1,10 @@
 @import "variables";
 
 @media print {
+  html, body {
+    height: auto;
+  }
+
   .web {
     display: none;
   }
@@ -14,6 +18,10 @@
       padding: 40px 0;
       border-bottom: 1px dashed $dark;
       page-break-inside: avoid;
+
+      &:last-child {
+        page-break-after: auto;
+      }
 
       .content {
         width: 80%;
