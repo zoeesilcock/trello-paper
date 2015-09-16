@@ -17,6 +17,12 @@ var Store = Reflux.createStore({
     return this.cards;
   },
 
+  getPrintCards() {
+    return this.cards.filter((card) => {
+      return card.print != false;
+    });
+  },
+
   getCard(id) {
     for (var i = 0; i < this.cards.length; i++) {
       if (this.cards[i].id == id) {
@@ -32,8 +38,10 @@ var Store = Reflux.createStore({
   },
 
   onChange(id, checked) {
+    this.getCard(id).print = checked;
     this.cardStates[id] = checked;
     this.commitCardStates();
+    this.trigger();
   },
 
   loadCards() {

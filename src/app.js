@@ -25,6 +25,7 @@ const App = React.createClass({
   componentDidMount() {
     Trello.setKey(process.env.TRELLO_API_KEY);
     Trello.authorize({ name: 'Trello Paper', success: this.authorized });
+
     OrganizationsStore.listen(this.onOrganizationsChange);
     BoardsStore.listen(this.onBoardsChange);
     ListsStore.listen(this.onListsChange);
@@ -43,6 +44,7 @@ const App = React.createClass({
       boards: BoardsStore.getBoards(),
       lists: ListsStore.getLists(),
       cards: CardsStore.getCards(),
+      printCards: CardsStore.getPrintCards(),
       scrollIndex: ScrollStore.getScrollIndex()
     };
   },
@@ -63,7 +65,10 @@ const App = React.createClass({
   },
 
   onCardsChange() {
-    this.setState({ cards: CardsStore.getCards() });
+    this.setState({
+      cards: CardsStore.getCards(),
+      printCards: CardsStore.getPrintCards()
+    });
   },
 
   onScrollChange() {
@@ -89,7 +94,7 @@ const App = React.createClass({
           </div>
           <a href="https://github.com/zoeesilcock/trello-paper" target="blank" className="github"><img src="images/github_mark.png" />github</a>
         </div>
-        <Print cards={this.state.cards} />
+        <Print cards={this.state.printCards} />
       </div>
     );
   }
