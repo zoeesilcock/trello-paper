@@ -74,7 +74,7 @@ var Store = Reflux.createStore({
   loadCardStates() {
     var data = Storage.getItem('card_states');
 
-    if (data !== 'undefined') {
+    if (data !== 'undefined' && data !== null) {
       this.cardStates = JSON.parse(data);
     }
 
