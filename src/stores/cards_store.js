@@ -44,6 +44,16 @@ var Store = Reflux.createStore({
     this.trigger();
   },
 
+  onChangeAll(checked) {
+    for (var i = 0; i < this.cards.length; i++) {
+      this.cards[i].print = checked;
+      this.cardStates[this.cards[i].id] = checked;
+    }
+
+    this.commitCardStates();
+    this.trigger();
+  },
+
   loadCards() {
     var current_list = ListsStore.getCurrentList();
 

@@ -9,7 +9,7 @@ class Card extends React.Component {
   render() {
     return (
       <li>
-        <span><input type="checkbox" defaultChecked={this.props.print} onChange={this.handleChange.bind(this)} /> {this.props.name}</span>
+        <span><input type="checkbox" checked={this.props.print} onChange={this.handleChange.bind(this)} /> {this.props.name}</span>
       </li>
     );
   }

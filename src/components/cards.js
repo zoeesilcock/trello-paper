@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './card';
 
+import Actions from '../actions/cards_actions';
 import ScrollActions from '../actions/scroll_actions';
 
 class Cards extends React.Component {
@@ -10,6 +11,7 @@ class Cards extends React.Component {
 
   printHandler(event) {
     window.print();
+    Actions.changeAll(false);
   }
 
   render() {
