@@ -15,7 +15,7 @@
     }
 
     ul li {
-      padding: 40px 0;
+      padding: 40px 0 20px 0;
       border-bottom: 1px dashed $dark;
       page-break-inside: avoid;
 
@@ -31,6 +31,7 @@
       .name {
         font-size: 24px;
         font-weight: bold;
+        margin: 0;
       }
 
       .description {
@@ -39,6 +40,11 @@
         max-height: 2em;
         overflow: hidden;
         text-overflow: ellipsis;
+        margin: 10px 0 0 0;
+
+        &:empty {
+          display: none;
+        }
       }
     }
   }
