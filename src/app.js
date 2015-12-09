@@ -1,6 +1,7 @@
 require('./styles/main.scss');
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Reflux from 'reflux';
 
 import Organizations from './components/organizations';
@@ -74,7 +75,7 @@ const App = React.createClass({
   onScrollChange() {
     this.setState({ scrollIndex: ScrollStore.getScrollIndex() });
 
-    var node = React.findDOMNode(this.refs.container);
+    var node = ReactDOM.findDOMNode(this.refs.container);
     var targetPosition = -(this.state.scrollIndex * ($(node).width() / 3));
     $(node).animate({'left': targetPosition + "px" }, 150);
   },
@@ -100,4 +101,4 @@ const App = React.createClass({
   }
 });
 
-React.render(<App />, document.body);
+ReactDOM.render(<App />, document.getElementById('app'));
