@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.js');
+var webpackDevConfig = require('./webpack.config.dev.js');
 
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-webpack');
@@ -29,11 +30,11 @@ module.exports = function(grunt) {
     },
     'webpack-dev-server': {
       options: {
-        webpack: webpackConfig
+        webpack: webpackDevConfig
       },
       start: {
         keepAlive: true,
-        contentBase: 'public',
+        contentBase: 'dev',
         webpack: {
           devtool: 'eval',
           debug: true
