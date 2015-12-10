@@ -1,21 +1,19 @@
 import React from 'react';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 
-import Actions from '../actions/boards_actions';
-import ScrollActions from '../actions/scroll_actions';
-import Store from '../stores/boards_store';
+import { pickBoard } from '../actions/boards';
+import { nextScroll } from '../actions/scroll';
 
 class Board extends React.Component {
   handleClick(event) {
-    Actions.pick(this.props.id);
-    ScrollActions.next();
+    this.props.dispatch(pickBoard(this.props.id));
+    this.props.dispatch(nextScroll());
   }
 
   render() {
-    var currentBoardId = Store.getCurrentBoard().id;
-
     return (
-      <li onClick={this.handleClick.bind(this)} className={classNames({ 'active': currentBoardId == this.props.id })}>
+      <li onClick={this.handleClick.bind(this)} className={classNames({ 'active': this.props.current == this.props.id })}>
         <span>{this.props.name}</span>
         <span className="chevron">&rang;</span>
       </li>
@@ -25,7 +23,8 @@ class Board extends React.Component {
 
 Board.propTypes = {
   id: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired
+  name: React.PropTypes.string.isRequired,
+  current: React.PropTypes.string
 };
 
-export default Board;
+export default connect(null)(Board);

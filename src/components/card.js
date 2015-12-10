@@ -1,9 +1,11 @@
 import React from 'react';
-import Actions from '../actions/cards_actions';
+import { connect } from 'react-redux';
+
+import { changeCard } from '../actions/cards';
 
 class Card extends React.Component {
   handleChange(event) {
-    Actions.change(this.props.id, event.target.checked);
+    this.props.dispatch(changeCard(this.props.id, event.target.checked));
   }
 
   render() {
@@ -23,4 +25,4 @@ Card.propTypes = {
 
 Card.defaultProps = { print: true };
 
-export default Card;
+export default connect(null)(Card);

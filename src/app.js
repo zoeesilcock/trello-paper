@@ -2,6 +2,7 @@ require('./styles/main.scss');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 
 import Organizations from './components/organizations';
 import Boards from './components/boards';
@@ -9,74 +10,26 @@ import Lists from './components/lists';
 import Cards from './components/cards';
 import Print from './components/print';
 
-import OrganizationsActions from './actions/organizations_actions';
-import BoardsActions from './actions/boards_actions';
-import ListsActions from './actions/lists_actions';
-import CardsActions from './actions/cards_actions';
-import ScrollActions from './actions/scroll_actions';
+import { loadOrganizations } from './actions/organizations';
 
-import OrganizationsStore from './stores/organizations_store';
-import BoardsStore from './stores/boards_store';
-import ListsStore from './stores/lists_store';
-import CardsStore from './stores/cards_store';
-import ScrollStore from './stores/scroll_store';
-
-export default React.createClass({
+var App = React.createClass({
   componentDidMount() {
     Trello.setKey(process.env.TRELLO_API_KEY);
     Trello.authorize({ name: 'Trello Paper', success: this.authorized });
-
-    OrganizationsStore.listen(this.onOrganizationsChange);
-    BoardsStore.listen(this.onBoardsChange);
-    ListsStore.listen(this.onListsChange);
-    CardsStore.listen(this.onCardsChange);
-    ScrollStore.listen(this.onScrollChange);
   },
 
   authorized() {
-    OrganizationsActions.load();
+    this.props.dispatch(loadOrganizations());
   },
 
-  getInitialState() {
-    return {
-      organizations: OrganizationsStore.getOrganizations(),
-      current_organization: OrganizationsStore.getCurrentOrganization(),
-      boards: BoardsStore.getBoards(),
-      lists: ListsStore.getLists(),
-      cards: CardsStore.getCards(),
-      printCards: CardsStore.getPrintCards(),
-      scrollIndex: ScrollStore.getScrollIndex()
-    };
-  },
-
-  onOrganizationsChange() {
-    this.setState({
-      organizations: OrganizationsStore.getOrganizations(),
-      current_organization: OrganizationsStore.getCurrentOrganization()
-    });
-  },
-
-  onBoardsChange() {
-    this.setState({ boards: BoardsStore.getBoards() });
-  },
-
-  onListsChange() {
-    this.setState({ lists: ListsStore.getLists() });
-  },
-
-  onCardsChange() {
-    this.setState({
-      cards: CardsStore.getCards(),
-      printCards: CardsStore.getPrintCards()
-    });
-  },
-
-  onScrollChange() {
-    this.setState({ scrollIndex: ScrollStore.getScrollIndex() });
-
+  updateScroll() {
     var node = ReactDOM.findDOMNode(this.refs.container);
-    var targetPosition = -(this.state.scrollIndex * ($(node).width() / 3));
+    var targetPosition = -(this.props.scrollIndex * ($(node).width() / 3));
     $(node).animate({'left': targetPosition + "px" }, 150);
+  },
+
+  componentDidUpdate() {
+    this.updateScroll();
   },
 
   render() {
@@ -84,18 +37,34 @@ export default React.createClass({
       <div>
         <div className="web">
           <h1>Trello Paper</h1>
-          <Organizations organizations={this.state.organizations} current={this.state.current_organization.id} />
+          <Organizations organizations={this.props.organizations} current={this.props.currentOrganization} />
           <div className="flex-scroll" ref="scroll">
             <div className="flex-container" ref="container">
-              <Boards boards={this.state.boards} />
-              <Lists lists={this.state.lists} />
-              <Cards cards={this.state.cards} />
+              <Boards boards={this.props.boards} current={this.props.currentBoard} />
+              <Lists lists={this.props.lists} current={this.props.currentList} />
+              <Cards cards={this.props.cards} />
             </div>
           </div>
           <a href="https://github.com/zoeesilcock/trello-paper" target="blank" className="github"><img src="images/github_mark.png" />github</a>
         </div>
-        <Print cards={this.state.printCards} />
+        <Print cards={this.props.printCards} />
       </div>
     );
   }
 });
+
+function select(state) {
+  return {
+    currentOrganization: state.organizations.current,
+    organizations: state.organizations.all,
+    boards: state.boards.all,
+    currentBoard: state.boards.current,
+    lists: state.lists.all,
+    currentList: state.lists.current,
+    cards: state.cards.all,
+    scrollIndex: state.scroll,
+    printCards: state.cards.all
+  }
+};
+
+export default connect(select)(App);

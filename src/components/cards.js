@@ -1,17 +1,18 @@
 import React from 'react';
-import Card from './card';
+import { connect } from 'react-redux';
 
-import Actions from '../actions/cards_actions';
-import ScrollActions from '../actions/scroll_actions';
+import Card from './card';
+import { previousScroll } from '../actions/scroll';
+import { changeAll } from '../actions/cards';
 
 class Cards extends React.Component {
   backHandler(event) {
-    ScrollActions.back();
+    this.props.dispatch(previousScroll());
   }
 
   printHandler(event) {
     window.print();
-    Actions.changeAll(false);
+    this.props.dispatch(changeAll(false));
   }
 
   render() {
@@ -23,7 +24,7 @@ class Cards extends React.Component {
 
     return (
       <div className="flex-column cards">
-        <button onClick={this.backHandler} className="back-button">&lang;</button>
+        <button onClick={this.backHandler.bind(this)} className="back-button">&lang;</button>
         <button onClick={this.printHandler} className="print-button">print</button>
         <h2>Cards</h2>
         <ul className="miller-column">
@@ -38,4 +39,4 @@ Cards.propTypes = {
   cards: React.PropTypes.array.isRequired
 };
 
-export default Cards;
+export default connect(null)(Cards);

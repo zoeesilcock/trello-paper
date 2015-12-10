@@ -1,23 +1,24 @@
 import React from 'react';
-import List from './list';
+import { connect } from 'react-redux';
 
-import ScrollActions from '../actions/scroll_actions';
+import List from './list';
+import { previousScroll } from '../actions/scroll';
 
 class Lists extends React.Component {
   backHandler(event) {
-    ScrollActions.back();
+    this.props.dispatch(previousScroll());
   }
 
   render() {
     var lists = [];
 
     this.props.lists.map((list, index) => {
-      lists.push(<List key={index} index={index} id={list.id} name={list.name} />);
+      lists.push(<List key={index} index={index} id={list.id} name={list.name} current={this.props.current} />);
     });
 
     return (
       <div className="flex-column lists">
-        <button onClick={this.backHandler}className="back-button">&lang;</button>
+        <button onClick={this.backHandler.bind(this)} className="back-button">&lang;</button>
         <h2>Lists</h2>
         <ul className="miller-column">
           {lists}
@@ -28,7 +29,8 @@ class Lists extends React.Component {
 }
 
 Lists.propTypes = {
-  lists: React.PropTypes.array.isRequired
+  lists: React.PropTypes.array.isRequired,
+  current: React.PropTypes.string
 }
 
-export default Lists;
+export default connect(null)(Lists);
