@@ -2,7 +2,6 @@ require('./styles/main.scss');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Reflux from 'reflux';
 
 import Organizations from './components/organizations';
 import Boards from './components/boards';
@@ -22,7 +21,7 @@ import ListsStore from './stores/lists_store';
 import CardsStore from './stores/cards_store';
 import ScrollStore from './stores/scroll_store';
 
-const App = React.createClass({
+export default React.createClass({
   componentDidMount() {
     Trello.setKey(process.env.TRELLO_API_KEY);
     Trello.authorize({ name: 'Trello Paper', success: this.authorized });
@@ -100,5 +99,3 @@ const App = React.createClass({
     );
   }
 });
-
-ReactDOM.render(<App />, document.getElementById('app'));
