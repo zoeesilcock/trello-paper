@@ -1,4 +1,4 @@
-import { LOAD_CARDS, CHANGE_CARD, CHANGE_ALL } from '../actions/cards';
+import { LOAD_CARDS } from '../actions/cards';
 
 var initialState = {
   all: []
@@ -10,8 +10,6 @@ export default function boards(state = initialState, action) {
       return Object.assign({}, state, {
         all: [...state.all, ...action.data]
       });
-    case CHANGE_CARD:
-    case CHANGE_ALL:
     default:
       return state;
   }

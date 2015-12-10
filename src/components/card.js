@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { changeCard } from '../actions/cards';
+import { changeCard } from '../actions/card_states';
 
 class Card extends React.Component {
   handleChange(event) {
@@ -11,7 +11,7 @@ class Card extends React.Component {
   render() {
     return (
       <li>
-        <span><input type="checkbox" checked={this.props.print} onChange={this.handleChange.bind(this)} /> {this.props.name}</span>
+        <span><input type="checkbox" checked={this.props.checked} onChange={this.handleChange.bind(this)} /> {this.props.name}</span>
       </li>
     );
   }

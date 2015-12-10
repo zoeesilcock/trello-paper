@@ -42,7 +42,7 @@ var App = React.createClass({
             <div className="flex-container" ref="container">
               <Boards boards={this.props.boards} current={this.props.currentBoard} />
               <Lists lists={this.props.lists} current={this.props.currentList} />
-              <Cards cards={this.props.cards} />
+              <Cards cards={this.props.cards} cardStates={this.props.cardStates} />
             </div>
           </div>
           <a href="https://github.com/zoeesilcock/trello-paper" target="blank" className="github"><img src="images/github_mark.png" />github</a>
@@ -62,6 +62,7 @@ function select(state) {
     lists: state.lists.all,
     currentList: state.lists.current,
     cards: state.cards.all,
+    cardStates: state.cardStates,
     scrollIndex: state.scroll,
     printCards: state.cards.all
   }
