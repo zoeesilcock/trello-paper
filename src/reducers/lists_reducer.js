@@ -9,7 +9,7 @@ export default function boards(state = initialState, action) {
   switch (action.type) {
     case LOAD_LISTS:
       var lists = state.all.filter((list) => {
-        if (list.idBoard != action.data[0].idBoard) {
+        if (action.data[0] != undefined && list.idBoard != action.data[0].idBoard) {
           return true;
         }
       });
