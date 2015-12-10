@@ -1,21 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import Actions from '../actions/lists_actions';
-import ScrollActions from '../actions/scroll_actions';
-import Store from '../stores/lists_store';
+import { nextScroll } from '../actions/scroll';
+import { pickList } from '../actions/lists';
 
 class List extends React.Component {
   handleClick(event) {
-    Actions.pick(this.props.id);
-    ScrollActions.next();
+    this.props.dispatch(pickList(this.props.id));
+    this.props.dispatch(nextScroll());
   }
 
   render() {
-    var currentListId = Store.getCurrentList().id;
-
     return (
-      <li onClick={this.handleClick.bind(this)} className={classNames({ 'active': currentListId == this.props.id })}>
+      <li onClick={this.handleClick.bind(this)} className={classNames({ 'active': this.props.current == this.props.id })}>
         <span>{this.props.name}</span>
         <span className="chevron">&rang;</span>
       </li>
@@ -25,7 +23,8 @@ class List extends React.Component {
 
 List.propTypes = {
   id: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired
+  name: React.PropTypes.string.isRequired,
+  current: React.PropTypes.string
 };
 
-export default List;
+export default connect(null)(List);

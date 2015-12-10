@@ -1,30 +1,38 @@
 import React from 'react';
-import Card from './card';
+import { connect } from 'react-redux';
 
-import Actions from '../actions/cards_actions';
-import ScrollActions from '../actions/scroll_actions';
+import Card from './card';
+import { previousScroll } from '../actions/scroll';
+import { changeAll } from '../actions/card_states';
 
 class Cards extends React.Component {
   backHandler(event) {
-    ScrollActions.back();
+    this.props.dispatch(previousScroll());
   }
 
   printHandler(event) {
+    var cardIds = this.props.cards.map((card) => { return card.id });
+    this.props.dispatch(changeAll(cardIds, false));
+
     window.print();
-    Actions.changeAll(false);
   }
 
   render() {
     var cards = [];
 
     this.props.cards.map((card, index) => {
-      cards.push(<Card key={index} index={index} id={card.id} name={card.name} print={card.print} />);
+      var checked = true;
+      if (this.props.cardStates && (card.id in this.props.cardStates)) {
+        checked = this.props.cardStates[card.id];
+      }
+
+      cards.push(<Card key={index} index={index} id={card.id} name={card.name} checked={checked} />);
     });
 
     return (
       <div className="flex-column cards">
-        <button onClick={this.backHandler} className="back-button">&lang;</button>
-        <button onClick={this.printHandler} className="print-button">print</button>
+        <button onClick={this.backHandler.bind(this)} className="back-button">&lang;</button>
+        <button onClick={this.printHandler.bind(this)} className="print-button">print</button>
         <h2>Cards</h2>
         <ul className="miller-column">
           {cards}
@@ -35,7 +43,8 @@ class Cards extends React.Component {
 }
 
 Cards.propTypes = {
-  cards: React.PropTypes.array.isRequired
+  cards: React.PropTypes.array.isRequired,
+  cardStates: React.PropTypes.object
 };
 
-export default Cards;
+export default connect(null)(Cards);
