@@ -10,7 +10,10 @@ import Lists from './components/lists';
 import Cards from './components/cards';
 import Print from './components/print';
 
-import { loadOrganizations } from './actions/organizations';
+import { nextScroll } from './actions/scroll';
+import { loadOrganizations, pickOrganization } from './actions/organizations';
+import { pickBoard } from './actions/boards';
+import { pickList } from './actions/lists';
 
 var App = React.createClass({
   componentDidMount() {
@@ -20,6 +23,21 @@ var App = React.createClass({
 
   authorized() {
     this.props.dispatch(loadOrganizations());
+
+    if (this.props.currentOrganization != undefined) {
+      this.props.dispatch(pickOrganization(this.props.currentOrganization));
+      this.props.dispatch(nextScroll());
+    }
+
+    if (this.props.currentBoard != undefined) {
+      this.props.dispatch(pickBoard(this.props.currentBoard));
+      this.props.dispatch(nextScroll());
+    }
+
+    if (this.props.currentList != undefined) {
+      this.props.dispatch(pickList(this.props.currentList));
+      this.props.dispatch(nextScroll());
+    }
   },
 
   updateScroll() {

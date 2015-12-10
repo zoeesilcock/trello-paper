@@ -1,4 +1,5 @@
 import { loadBoards } from './boards';
+
 export const LOAD_ORGANIZATIONS = 'LOAD_ORGANIZATIONS';
 export const PICK_ORGANIZATION = 'PICK_ORGANIZATION';
 
