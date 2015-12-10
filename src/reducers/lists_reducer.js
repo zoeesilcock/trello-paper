@@ -13,7 +13,7 @@ export default function boards(state = initialState, action) {
       });
     case PICK_LIST:
       return Object.assign({}, state, {
-        current: action.board
+        current: action.list
       });
     default:
       return state;

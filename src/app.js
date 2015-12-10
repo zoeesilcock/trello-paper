@@ -53,18 +53,50 @@ var App = React.createClass({
   }
 });
 
+function filterBoards(currentOrganization, boards) {
+  return boards.filter((board) => {
+    if (board.idOrganization == currentOrganization) {
+      return true;
+    }
+  });
+}
+
+function filterLists(currentBoard, lists) {
+  return lists.filter((list) => {
+    if (list.idBoard == currentBoard) {
+      return true;
+    }
+  });
+}
+
+function filterCards(currentList, cards) {
+  return cards.filter((card) => {
+    if (card.idList == currentList) {
+      return true;
+    }
+  });
+}
+
+function filterPrintCards(cards, cardStates) {
+  return cards.filter((card) => {
+    if (cardStates[card.id] == undefined || cardStates[card.id]) {
+      return true;
+    }
+  });
+}
+
 function select(state) {
   return {
     currentOrganization: state.organizations.current,
     organizations: state.organizations.all,
-    boards: state.boards.all,
+    boards: filterBoards(state.organizations.current, state.boards.all),
     currentBoard: state.boards.current,
-    lists: state.lists.all,
+    lists: filterLists(state.boards.current, state.lists.all),
     currentList: state.lists.current,
-    cards: state.cards.all,
+    cards: filterCards(state.lists.current, state.cards.all),
     cardStates: state.cardStates,
     scrollIndex: state.scroll,
-    printCards: state.cards.all
+    printCards: filterPrintCards(filterCards(state.lists.current, state.cards.all), state.cardStates)
   }
 };
 
