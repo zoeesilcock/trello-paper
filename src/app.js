@@ -18,8 +18,16 @@ import { loadCards } from './actions/cards';
 
 var App = React.createClass({
   componentDidMount() {
+    this.authorize();
+  },
+
+  authorize() {
     Trello.setKey(process.env.TRELLO_API_KEY);
-    Trello.authorize({ name: 'Trello Paper', success: this.authorized });
+    Trello.authorize({
+      name: 'Trello Paper',
+      success: this.authorized,
+      error: this.authorizationFailed
+    });
   },
 
   authorized() {
@@ -41,6 +49,10 @@ var App = React.createClass({
       }
       this.props.dispatch(nextScroll());
     }
+  },
+
+  authorizationFailed() {
+    localStorage.removeItem('trello_token');
   },
 
   updateScroll() {
