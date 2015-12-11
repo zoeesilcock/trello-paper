@@ -1,8 +1,8 @@
-import { LOAD_LISTS, PICK_LIST } from '../actions/lists';
+import { LOAD_LISTS, PICK_LIST, TOGGLE_LIST } from '../actions/lists';
 
 var initialState = {
   all: [],
-  current: null
+  current: []
 };
 
 export default function boards(state = initialState, action) {
@@ -19,7 +19,20 @@ export default function boards(state = initialState, action) {
       });
     case PICK_LIST:
       return Object.assign({}, state, {
-        current: action.list
+        current: [action.list]
+      });
+    case TOGGLE_LIST:
+      var currentLists = state.current.slice();
+      var index = currentLists.indexOf(action.list)
+
+      if (index != -1) {
+        currentLists.splice(index, 1);
+      } else {
+        currentLists.push(action.list);
+      }
+
+      return Object.assign({}, state, {
+        current: currentLists
       });
     default:
       return state;

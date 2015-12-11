@@ -11,9 +11,10 @@ import Cards from './components/cards';
 import Print from './components/print';
 
 import { nextScroll } from './actions/scroll';
-import { loadOrganizations, pickOrganization } from './actions/organizations';
-import { pickBoard } from './actions/boards';
-import { pickList } from './actions/lists';
+import { loadOrganizations } from './actions/organizations';
+import { loadBoards } from './actions/boards';
+import { loadLists } from './actions/lists';
+import { loadCards } from './actions/cards';
 
 var App = React.createClass({
   componentDidMount() {
@@ -25,17 +26,19 @@ var App = React.createClass({
     this.props.dispatch(loadOrganizations());
 
     if (this.props.currentOrganization != undefined) {
-      this.props.dispatch(pickOrganization(this.props.currentOrganization));
+      this.props.dispatch(loadBoards(this.props.currentOrganization));
       this.props.dispatch(nextScroll());
     }
 
     if (this.props.currentBoard != undefined) {
-      this.props.dispatch(pickBoard(this.props.currentBoard));
+      this.props.dispatch(loadLists(this.props.currentBoard));
       this.props.dispatch(nextScroll());
     }
 
-    if (this.props.currentList != undefined) {
-      this.props.dispatch(pickList(this.props.currentList));
+    if (this.props.currentLists.length > 0) {
+      for (var i in this.props.currentLists) {
+        this.props.dispatch(loadCards(this.props.currentLists[i]));
+      }
       this.props.dispatch(nextScroll());
     }
   },
@@ -59,7 +62,7 @@ var App = React.createClass({
           <div className="flex-scroll" ref="scroll">
             <div className="flex-container" ref="container">
               <Boards boards={this.props.boards} current={this.props.currentBoard} />
-              <Lists lists={this.props.lists} current={this.props.currentList} />
+              <Lists lists={this.props.lists} current={this.props.currentLists} />
               <Cards cards={this.props.cards} cardStates={this.props.cardStates} />
             </div>
           </div>
@@ -87,9 +90,9 @@ function filterLists(currentBoard, lists) {
   });
 }
 
-function filterCards(currentList, cards) {
+function filterCards(currentLists, cards) {
   return cards.filter((card) => {
-    if (card.idList == currentList) {
+    if (currentLists.indexOf(card.idList) != -1) {
       return true;
     }
   });
@@ -110,7 +113,7 @@ function select(state) {
     boards: filterBoards(state.organizations.current, state.boards.all),
     currentBoard: state.boards.current,
     lists: filterLists(state.boards.current, state.lists.all),
-    currentList: state.lists.current,
+    currentLists: state.lists.current,
     cards: filterCards(state.lists.current, state.cards.all),
     cardStates: state.cardStates,
     scrollIndex: state.scroll,

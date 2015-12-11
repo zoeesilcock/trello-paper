@@ -3,17 +3,25 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 import { nextScroll } from '../actions/scroll';
-import { pickList } from '../actions/lists';
+import { pickList, toggleList } from '../actions/lists';
 
 class List extends React.Component {
   handleClick(event) {
-    this.props.dispatch(pickList(this.props.id));
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (event.shiftKey) {
+      this.props.dispatch(toggleList(this.props.id));
+    } else {
+      this.props.dispatch(pickList(this.props.id));
+    }
+
     this.props.dispatch(nextScroll());
   }
 
   render() {
     return (
-      <li onClick={this.handleClick.bind(this)} className={classNames({ 'active': this.props.current == this.props.id })}>
+      <li onClick={this.handleClick.bind(this)} className={classNames({ 'active': this.props.current.indexOf(this.props.id) != -1 })}>
         <span>{this.props.name}</span>
         <span className="chevron">&rang;</span>
       </li>
@@ -24,7 +32,7 @@ class List extends React.Component {
 List.propTypes = {
   id: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
-  current: React.PropTypes.string
+  current: React.PropTypes.array
 };
 
 export default connect(null)(List);

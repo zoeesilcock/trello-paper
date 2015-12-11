@@ -30,7 +30,7 @@ class Lists extends React.Component {
 
 Lists.propTypes = {
   lists: React.PropTypes.array.isRequired,
-  current: React.PropTypes.string
+  current: React.PropTypes.array
 }
 
 export default connect(null)(Lists);
