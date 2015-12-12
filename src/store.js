@@ -5,9 +5,22 @@ import persistState from 'redux-localstorage'
 import slicer from './storage_slicer';
 import rootReducer from './reducers';
 
-const createStoreWithMiddleware = compose(
-  persistState(['boards', 'cards', 'cardStates', 'lists', 'organizations'], { slicer: slicer }),
-  applyMiddleware(thunk)
-)(createStore);
+let persistedStores = ['boards', 'cards', 'cardStates', 'lists', 'organizations'];
+let createStoreWithMiddleware;
+
+if (__DEV__) {
+  let devTools = require('./dev_store');
+
+  createStoreWithMiddleware = compose(
+    persistState(persistedStores, { slicer: slicer }),
+    applyMiddleware(thunk),
+    devTools
+  )(createStore);
+} else {
+  createStoreWithMiddleware = compose(
+    persistState(persistedStores, { slicer: slicer }),
+    applyMiddleware(thunk)
+  )(createStore);
+}
 
 export default createStoreWithMiddleware(rootReducer);
