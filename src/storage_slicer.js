@@ -3,7 +3,7 @@ export default function(paths) {
     let subset = {};
 
     for (var key in state) {
-      if (key == 'boards' || key == 'cards' || key == 'lists' || key == 'organizations') {
+      if (key == 'boards' || key == 'cards' || key == 'lists' || key == 'organizations' || key == 'printLayout') {
         subset[key] = { all: [], current: state[key].current };
       } else if (key == 'cardStates') {
         subset[key] = state[key];

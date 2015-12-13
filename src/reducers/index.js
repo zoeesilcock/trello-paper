@@ -5,6 +5,7 @@ import cards from './cards_reducer';
 import cardStates from './card_states_reducer';
 import lists from './lists_reducer';
 import scroll from './scroll_reducer';
+import printLayout from './print_layout_reducer';
 
 export default combineReducers({
   organizations,
@@ -12,5 +13,6 @@ export default combineReducers({
   cards,
   cardStates,
   lists,
-  scroll
+  scroll,
+  printLayout
 });

@@ -9,6 +9,7 @@ import Boards from './components/boards';
 import Lists from './components/lists';
 import Cards from './components/cards';
 import Print from './components/print';
+import PrintLayout from './components/print_layout';
 
 import { nextScroll } from './actions/scroll';
 import { loadOrganizations } from './actions/organizations';
@@ -71,6 +72,7 @@ var App = React.createClass({
         <div className="web">
           <h1>Trello Paper</h1>
           <Organizations organizations={this.props.organizations} current={this.props.currentOrganization} />
+          <PrintLayout current={this.props.currentPrintLayout} />
           <div className="flex-scroll" ref="scroll">
             <div className="flex-container" ref="container">
               <Boards boards={this.props.boards} current={this.props.currentBoard} />
@@ -80,7 +82,7 @@ var App = React.createClass({
           </div>
           <a href="https://github.com/zoeesilcock/trello-paper" target="blank" className="github"><img src="images/github_mark.png" />github</a>
         </div>
-        <Print cards={this.props.printCards} />
+        <Print cards={this.props.printCards} layout={this.props.currentPrintLayout} />
       </div>
     );
   }
@@ -129,7 +131,8 @@ function select(state) {
     cards: filterCards(state.lists.current, state.cards.all),
     cardStates: state.cardStates,
     scrollIndex: state.scroll,
-    printCards: filterPrintCards(filterCards(state.lists.current, state.cards.all), state.cardStates)
+    printCards: filterPrintCards(filterCards(state.lists.current, state.cards.all), state.cardStates),
+    currentPrintLayout: state.printLayout.current
   }
 };
 

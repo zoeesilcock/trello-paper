@@ -5,7 +5,7 @@ import persistState from 'redux-localstorage'
 import slicer from './storage_slicer';
 import rootReducer from './reducers';
 
-let persistedStores = ['boards', 'cards', 'cardStates', 'lists', 'organizations'];
+let persistedStores = ['boards', 'cards', 'cardStates', 'lists', 'organizations', 'print_layout'];
 let createStoreWithMiddleware;
 
 if (__DEV__) {
