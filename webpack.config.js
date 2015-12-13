@@ -28,6 +28,9 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin([
       'TRELLO_API_KEY'
-    ])
+    ]),
+    new webpack.DefinePlugin({
+      __DEV__: false
+    })
   ]
 };
