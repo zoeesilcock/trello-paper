@@ -1,6 +1,6 @@
 import { NEXT_SCROLL, PREVIOUS_SCROLL } from '../actions/scroll';
 
-export default function organizations(state = 0, action) {
+export default function sroll(state = 0, action) {
   switch (action.type) {
     case NEXT_SCROLL:
       var index = state + 1;
