@@ -1,5 +1,3 @@
-var expect = require('expect.js');
-
 import { NEXT_SCROLL, PREVIOUS_SCROLL } from '../../src/actions/scroll';
 import ScrollReducer from '../../src/reducers/scroll_reducer';
 
