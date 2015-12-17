@@ -5,7 +5,7 @@ var initialState = {
   current: []
 };
 
-export default function boards(state = initialState, action) {
+export default function lists(state = initialState, action) {
   switch (action.type) {
     case LOAD_LISTS:
       var lists = state.all.filter((list) => {
