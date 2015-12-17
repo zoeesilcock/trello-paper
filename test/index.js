@@ -6,4 +6,5 @@ require('./reducers/card_states_reducer_test');
 require('./reducers/cards_reducer_test');
 require('./reducers/lists_reducer_test');
 require('./reducers/organizations_reducer_test');
+require('./reducers/print_layout_reducer_test');
 require('./reducers/scroll_reducer_test');
