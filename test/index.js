@@ -1,4 +1,4 @@
-var expect = require('expect.js');
+let expect = require('expect.js');
 
 require('./sanity');
 require('./reducers/boards_reducer_test');

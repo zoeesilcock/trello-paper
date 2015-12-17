@@ -4,21 +4,25 @@ import ScrollReducer from '../../src/reducers/scroll_reducer';
 describe('ScrollReducer', () => {
   describe('NEXT_SCROLL', () => {
     it('increases the scroll index', () => {
-      expect(ScrollReducer(0, { type: NEXT_SCROLL })).to.be(1);
+      let action = { type: NEXT_SCROLL };
+      expect(ScrollReducer(0, action)).to.be(1);
     });
 
     it('does not pass the scroll limit', () => {
-      expect(ScrollReducer(2, { type: NEXT_SCROLL })).to.be(2);
+      let action = { type: NEXT_SCROLL };
+      expect(ScrollReducer(2, action)).to.be(2);
     });
   });
 
   describe('PREVIOUS_SCROLL', () => {
     it('decreases the scroll index', () => {
-      expect(ScrollReducer(1, { type: PREVIOUS_SCROLL })).to.be(0);
+      let action = { type: PREVIOUS_SCROLL };
+      expect(ScrollReducer(1, action)).to.be(0);
     });
 
     it('does not pass the scroll limit', () => {
-      expect(ScrollReducer(0, { type: PREVIOUS_SCROLL })).to.be(0);
+      let action = { type: PREVIOUS_SCROLL };
+      expect(ScrollReducer(0, action)).to.be(0);
     });
   });
 });
