@@ -1,6 +1,6 @@
 import { CHANGE_CARD, CHANGE_ALL } from '../actions/card_states';
 
-export default function boards(state = {}, action) {
+export default function cardStates(state = {}, action) {
   switch (action.type) {
     case CHANGE_CARD:
       var cardState = {}
