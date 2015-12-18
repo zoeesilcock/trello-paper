@@ -21,7 +21,10 @@ module.exports = {
         'babel-loader'
       ],
       exclude: path.join(__dirname, 'node_modules')
-    } ]
+    } ],
+    noParse: [
+      /node_modules\/sinon\//,
+    ]
   },
   plugins: [
     new webpack.EnvironmentPlugin([
@@ -30,5 +33,17 @@ module.exports = {
     new webpack.DefinePlugin({
       __DEV__: true
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      'sinon': 'sinon/pkg/sinon'
+    }
+  },
+  externals: {
+    'jsdom': 'window',
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': 'window',
+    'text-encoding': 'window'
+  }
 };
