@@ -6,19 +6,23 @@ import App from './app';
 import trelloPaperApp from './reducers';
 import store from './store';
 
-if (__DEV__) {
-  let Dev = require('./components/dev')(store);
+let devTools = '';
 
-  ReactDOM.render(
-    <Dev />,
-    document.getElementById('devtools')
+if (__DEV__) {
+  let DevTools = require('./components/dev_tools');
+
+  devTools = (
+    <DevTools />
   );
 }
 
 ReactDOM.render(
   <div>
     <Provider store={store}>
-      <App />
+      <div>
+        <App />
+        {devTools}
+      </div>
     </Provider>
   </div>,
   document.getElementById('app')

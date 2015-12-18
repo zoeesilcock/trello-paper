@@ -16,12 +16,12 @@ let localStorageConfig = {
 let createStoreWithMiddleware;
 
 if (__DEV__) {
-  let devTools = require('./dev_store');
+  let DevTools = require('./components/dev_tools');
 
   createStoreWithMiddleware = compose(
     persistState(persistedStores, localStorageConfig),
     applyMiddleware(thunk),
-    devTools
+    DevTools.instrument()
   )(createStore);
 } else {
   createStoreWithMiddleware = compose(
