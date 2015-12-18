@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import App from './app';
-import trelloPaperApp from './reducers';
-import store from './store';
+import store from './store/index';
 
 let devTools = '';
 

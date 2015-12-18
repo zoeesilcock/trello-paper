@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 import persistState from 'redux-localstorage'
 import { Map, fromJS } from 'immutable';
 
-import slicer from './storage_slicer';
-import rootReducer from './reducers';
+import slicer from './slicer';
+import rootReducer from '../reducers';
 
 let persistedStores = ['boards', 'cards', 'cardStates', 'lists', 'organizations', 'print_layout'];
 let localStorageConfig = {
@@ -16,7 +16,7 @@ let localStorageConfig = {
 let createStoreWithMiddleware;
 
 if (__DEV__) {
-  let DevTools = require('./components/dev_tools');
+  let DevTools = require('../components/dev_tools');
 
   createStoreWithMiddleware = compose(
     persistState(persistedStores, localStorageConfig),
