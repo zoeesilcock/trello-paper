@@ -12,7 +12,7 @@ class Organizations extends React.Component {
     var organizations = [];
 
     this.props.organizations.map((organization, index) => {
-      organizations.push(<Organization key={index} name={organization.name} id={organization.id} />);
+      organizations.push(<Organization key={index} name={organization.get('name')} id={organization.get('id')} />);
     });
 
     return (
@@ -25,7 +25,7 @@ class Organizations extends React.Component {
 }
 
 Organizations.propTypes = {
-  organizations: React.PropTypes.array.isRequired,
+  organizations: React.PropTypes.object.isRequired,
   current: React.PropTypes.string
 };
 

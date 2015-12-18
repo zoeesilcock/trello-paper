@@ -5,6 +5,10 @@ export const PICK_LIST = 'PICK_LIST';
 export const TOGGLE_LIST = 'TOGGLE_LIST';
 
 export function loadLists(boardId) {
+  if (!boardId) {
+    return dispatch({ type: LOAD_LISTS, data: [] });
+  }
+
   return (dispatch) => {
     Trello.get('boards/' + boardId + '/lists', (data) => {
       dispatch({ type: LOAD_LISTS, data });

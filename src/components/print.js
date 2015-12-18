@@ -7,7 +7,7 @@ class Print extends React.Component {
     var layout = this.props.layout + '-columns';
 
     this.props.cards.map((card, index) => {
-      cards.push(<PrintCard key={index} index={index} id={card.id} name={card.name} description={card.desc} />);
+      cards.push(<PrintCard key={index} index={index} id={card.get('id')} name={card.get('name')} description={card.get('desc')} />);
     });
 
     return (
@@ -21,7 +21,7 @@ class Print extends React.Component {
 }
 
 Print.propTypes = {
-  cards: React.PropTypes.array.isRequired,
+  cards: React.PropTypes.object.isRequired,
   layout: React.PropTypes.string
 };
 

@@ -1,19 +1,16 @@
+import { Map } from 'immutable';
 import { CHANGE_CARD, CHANGE_ALL } from '../actions/card_states';
 
-export default function cardStates(state = {}, action) {
+export default function cardStates(state = Map(), action) {
   switch (action.type) {
     case CHANGE_CARD:
-      var cardState = {}
-      cardState[action.cardId] = action.checked;
-      return Object.assign({}, state, cardState);
+      return state.set(action.cardId, action.checked);
     case CHANGE_ALL:
-      var newState = Object.assign({}, state);
+      action.cardIds.forEach((cardId) => {
+        state = state.set(cardId, action.checked);
+      });
 
-      for (var index in action.cardIds) {
-        newState[action.cardIds[index]] = action.checked;
-      }
-
-      return newState;
+      return state;
     default:
       return state;
   }

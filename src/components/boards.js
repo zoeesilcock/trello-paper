@@ -5,8 +5,8 @@ class Boards extends React.Component {
   render() {
     var boards = [];
 
-    this.props.boards.map((board, index) => {
-      boards.push(<Board key={index} index={index} id={board.id} name={board.name} current={this.props.current} />);
+    this.props.boards.forEach((board, index) => {
+      boards.push(<Board key={index} index={index} id={board.get('id')} name={board.get('name')} current={this.props.current} />);
     });
 
     return (
@@ -21,7 +21,7 @@ class Boards extends React.Component {
 }
 
 Boards.propTypes = {
-  boards: React.PropTypes.array.isRequired,
+  boards: React.PropTypes.object.isRequired,
   current: React.PropTypes.string
 };
 

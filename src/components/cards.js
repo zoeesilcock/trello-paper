@@ -11,7 +11,7 @@ class Cards extends React.Component {
   }
 
   printHandler(event) {
-    var cardIds = this.props.cards.map((card) => { return card.id });
+    var cardIds = this.props.cards.map((card) => { return card.get('id') });
     this.props.dispatch(changeAll(cardIds, false));
 
     window.print();
@@ -20,13 +20,13 @@ class Cards extends React.Component {
   render() {
     var cards = [];
 
-    this.props.cards.map((card, index) => {
+    this.props.cards.forEach((card, index) => {
       var checked = true;
-      if (this.props.cardStates && (card.id in this.props.cardStates)) {
-        checked = this.props.cardStates[card.id];
+      if (this.props.cardStates && this.props.cardStates.has(card.get('id'))) {
+        checked = this.props.cardStates.get(card.get('id'));
       }
 
-      cards.push(<Card key={index} index={index} id={card.id} name={card.name} checked={checked} />);
+      cards.push(<Card key={index} index={index} id={card.get('id')} name={card.get('name')} checked={checked} />);
     });
 
     return (
@@ -43,7 +43,7 @@ class Cards extends React.Component {
 }
 
 Cards.propTypes = {
-  cards: React.PropTypes.array.isRequired,
+  cards: React.PropTypes.object.isRequired,
   cardStates: React.PropTypes.object
 };
 
