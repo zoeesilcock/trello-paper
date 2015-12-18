@@ -13,7 +13,12 @@ export class Organizations extends React.Component {
     var organizations = [];
 
     this.props.organizations.map((organization, index) => {
-      organizations.push(<Organization key={index} name={organization.get('name')} id={organization.get('id')} />);
+      organizations.push(
+        <Organization
+          key={index}
+          id={organization.get('id')}
+          name={organization.get('name')} />
+      );
     });
 
     return (
