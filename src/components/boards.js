@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Board from './board';
 
 class Boards extends React.Component {
@@ -6,7 +6,13 @@ class Boards extends React.Component {
     var boards = [];
 
     this.props.boards.forEach((board, index) => {
-      boards.push(<Board key={index} index={index} id={board.get('id')} name={board.get('name')} current={this.props.current} />);
+      boards.push(
+        <Board key={index}
+          index={index}
+          id={board.get('id')}
+          name={board.get('name')}
+          current={this.props.current} />
+      );
     });
 
     return (
@@ -21,8 +27,8 @@ class Boards extends React.Component {
 }
 
 Boards.propTypes = {
-  boards: React.PropTypes.object.isRequired,
-  current: React.PropTypes.string
+  boards: PropTypes.object.isRequired,
+  current: PropTypes.string
 };
 
 export default Boards;

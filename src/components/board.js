@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import { pickBoard } from '../actions/boards';
 import { nextScroll } from '../actions/scroll';
 
-class Board extends React.Component {
+export class Board extends React.Component {
   handleClick(event) {
     this.props.dispatch(pickBoard(this.props.id));
     this.props.dispatch(nextScroll());
@@ -22,9 +22,9 @@ class Board extends React.Component {
 };
 
 Board.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  current: React.PropTypes.string
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  current: PropTypes.string
 };
 
-export default connect(null)(Board);
+export default connect()(Board);

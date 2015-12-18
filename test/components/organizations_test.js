@@ -19,7 +19,7 @@ describe('<Organizations />', () => {
     expect(wrapper.find('option').text()).to.equal('Pick an organization');
   });
 
-  it('renders an organization element', () => {
+  it('renders organization elements', () => {
     const wrapper = shallow(<Organizations organizations={organizations} />);
     expect(wrapper.find(Organization)).to.have.length(1);
   });
