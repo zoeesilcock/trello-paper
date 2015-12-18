@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-class Organization extends React.Component {
+export class Organization extends React.Component {
   render() {
     return (
       <option value={this.props.id}>
@@ -11,8 +11,8 @@ class Organization extends React.Component {
 };
 
 Organization.propTyles = {
-  id: React.PropTypes.number.isRequired,
-  name: React.PropTypes.string.isRequired
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default Organization;

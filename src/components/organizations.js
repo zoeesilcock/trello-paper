@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+
 import Organization from './organization';
 import { pickOrganization } from '../actions/organizations';
 
-class Organizations extends React.Component {
+export class Organizations extends React.Component {
   handleChange(event) {
     this.props.dispatch(pickOrganization(event.target.value));
   }
@@ -25,8 +26,8 @@ class Organizations extends React.Component {
 }
 
 Organizations.propTypes = {
-  organizations: React.PropTypes.object.isRequired,
-  current: React.PropTypes.string
+  organizations: PropTypes.object.isRequired,
+  current: PropTypes.string
 };
 
-export default connect(null)(Organizations);
+export default connect()(Organizations);
