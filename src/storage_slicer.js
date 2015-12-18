@@ -1,15 +1,17 @@
+import { Map, List, fromJS } from 'immutable';
+
 export default function(paths) {
   return (state) => {
     let subset = {};
 
-    for (var key in state) {
+    state.forEach((value, key) => {
       if (key == 'boards' || key == 'cards' || key == 'lists' || key == 'organizations' || key == 'printLayout') {
-        subset[key] = { all: [], current: state[key].current };
+        subset[key] = Map({ all: List(), current: value.get('current') });
       } else if (key == 'cardStates') {
-        subset[key] = state[key];
+        subset[key] = state.get(key);
       }
-    }
+    });
 
-    return subset;
+    return fromJS(subset);
   }
 };

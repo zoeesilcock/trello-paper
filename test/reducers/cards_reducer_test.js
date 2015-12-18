@@ -1,3 +1,4 @@
+import { Map, List, fromJS } from 'immutable';
 import { LOAD_CARDS } from '../../src/actions/cards';
 import CardsReducer from '../../src/reducers/cards_reducer';
 
@@ -7,14 +8,16 @@ describe('CardsReducer', () => {
   describe('LOAD_BOARDS', () => {
     it('adds the cards to the list', () => {
       let action = { type: LOAD_CARDS, data: [exampleCard] };
-      let newState = CardsReducer({ all: [] }, action);
-      expect(newState.all).to.eql([exampleCard]);
+      let state = Map({ all: List() });
+      let newState = CardsReducer(state, action);
+      expect(newState.get('all')).to.include(fromJS(exampleCard));
     });
 
     it('replaces duplicates', () => {
       let action = { type: LOAD_CARDS, data: [exampleCard] };
-      let newState = CardsReducer({ all: [exampleCard] }, action);
-      expect(newState.all.length).to.eql(1);
+      let state = Map({ all: fromJS([exampleCard]) });
+      let newState = CardsReducer(state, action);
+      expect(newState.get('all').size).to.equal(1);
     });
   });
 });

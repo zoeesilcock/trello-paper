@@ -1,20 +1,17 @@
+import { Map, List, fromJS } from 'immutable';
 import { LOAD_ORGANIZATIONS, PICK_ORGANIZATION } from '../actions/organizations';
 
-var initialState = {
-  all: [],
+var initialState = Map({
+  all: List(),
   current: null
-};
+});
 
 export default function organizations(state = initialState, action) {
   switch (action.type) {
     case LOAD_ORGANIZATIONS:
-      return Object.assign({}, state, {
-        all: [...state.all, ...action.data]
-      });
+      return state.set('all', state.get('all').concat(fromJS(action.data)));
     case PICK_ORGANIZATION:
-      return Object.assign({}, state, {
-        current: action.organization
-      });
+      return state.set('current', fromJS(action.organization));
     default:
       return state;
   }

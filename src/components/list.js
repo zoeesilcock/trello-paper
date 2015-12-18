@@ -32,7 +32,7 @@ class List extends React.Component {
 List.propTypes = {
   id: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
-  current: React.PropTypes.array
+  current: React.PropTypes.object
 };
 
 export default connect(null)(List);

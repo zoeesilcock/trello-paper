@@ -1,10 +1,7 @@
-let expect = require('expect.js');
+var chai = require('chai');
+var chaiImmutable = require('chai-immutable');
+chai.use(chaiImmutable);
+global.expect = chai.expect;
 
-require('./sanity');
-require('./reducers/boards_reducer_test');
-require('./reducers/card_states_reducer_test');
-require('./reducers/cards_reducer_test');
-require('./reducers/lists_reducer_test');
-require('./reducers/organizations_reducer_test');
-require('./reducers/print_layout_reducer_test');
-require('./reducers/scroll_reducer_test');
+let testsContext = require.context('.', true, /_test/);
+testsContext.keys().forEach(testsContext);

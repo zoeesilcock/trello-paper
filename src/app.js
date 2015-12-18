@@ -44,10 +44,10 @@ var App = React.createClass({
       this.props.dispatch(nextScroll());
     }
 
-    if (this.props.currentLists.length > 0) {
-      for (var i in this.props.currentLists) {
-        this.props.dispatch(loadCards(this.props.currentLists[i]));
-      }
+    if (this.props.currentLists.size > 0) {
+      this.props.currentLists.forEach((list) => {
+        this.props.dispatch(loadCards(list));
+      })
       this.props.dispatch(nextScroll());
     }
   },
@@ -90,7 +90,7 @@ var App = React.createClass({
 
 function filterBoards(currentOrganization, boards) {
   return boards.filter((board) => {
-    if (board.idOrganization == currentOrganization) {
+    if (board.get('idOrganization') == currentOrganization) {
       return true;
     }
   });
@@ -98,7 +98,7 @@ function filterBoards(currentOrganization, boards) {
 
 function filterLists(currentBoard, lists) {
   return lists.filter((list) => {
-    if (list.idBoard == currentBoard) {
+    if (list.get('idBoard') == currentBoard) {
       return true;
     }
   });
@@ -106,7 +106,7 @@ function filterLists(currentBoard, lists) {
 
 function filterCards(currentLists, cards) {
   return cards.filter((card) => {
-    if (currentLists.indexOf(card.idList) != -1) {
+    if (currentLists.indexOf(card.get('idList')) != -1) {
       return true;
     }
   });
@@ -114,7 +114,7 @@ function filterCards(currentLists, cards) {
 
 function filterPrintCards(cards, cardStates) {
   return cards.filter((card) => {
-    if (cardStates[card.id] == undefined || cardStates[card.id]) {
+    if (cardStates.get(card.id) == undefined || cardStates.get(card.id)) {
       return true;
     }
   });
@@ -122,17 +122,17 @@ function filterPrintCards(cards, cardStates) {
 
 function select(state) {
   return {
-    currentOrganization: state.organizations.current,
-    organizations: state.organizations.all,
-    boards: filterBoards(state.organizations.current, state.boards.all),
-    currentBoard: state.boards.current,
-    lists: filterLists(state.boards.current, state.lists.all),
-    currentLists: state.lists.current,
-    cards: filterCards(state.lists.current, state.cards.all),
-    cardStates: state.cardStates,
-    scrollIndex: state.scroll,
-    printCards: filterPrintCards(filterCards(state.lists.current, state.cards.all), state.cardStates),
-    currentPrintLayout: state.printLayout.current
+    currentOrganization: state.get('organizations').get('current'),
+    organizations: state.get('organizations').get('all'),
+    boards: filterBoards(state.get('organizations').get('current'), state.get('boards').get('all')),
+    currentBoard: state.get('boards').get('current'),
+    lists: filterLists(state.get('boards').get('current'), state.get('lists').get('all')),
+    currentLists: state.get('lists').get('current'),
+    cards: filterCards(state.get('lists').get('current'), state.get('cards').get('all')),
+    cardStates: state.get('cardStates'),
+    scrollIndex: state.get('scroll'),
+    printCards: filterPrintCards(filterCards(state.get('lists').get('current'), state.get('cards').get('all')), state.get('cardStates')),
+    currentPrintLayout: state.get('printLayout').get('current')
   }
 };
 

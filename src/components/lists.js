@@ -12,8 +12,8 @@ class Lists extends React.Component {
   render() {
     var lists = [];
 
-    this.props.lists.map((list, index) => {
-      lists.push(<List key={index} index={index} id={list.id} name={list.name} current={this.props.current} />);
+    this.props.lists.forEach((list, index) => {
+      lists.push(<List key={index} index={index} id={list.get('id')} name={list.get('name')} current={this.props.current} />);
     });
 
     return (
@@ -29,8 +29,8 @@ class Lists extends React.Component {
 }
 
 Lists.propTypes = {
-  lists: React.PropTypes.array.isRequired,
-  current: React.PropTypes.array
+  lists: React.PropTypes.object.isRequired,
+  current: React.PropTypes.object
 }
 
 export default connect(null)(Lists);

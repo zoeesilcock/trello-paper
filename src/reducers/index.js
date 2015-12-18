@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutablejs';
 import organizations from './organizations_reducer';
 import boards from './boards_reducer';
 import cards from './cards_reducer';
