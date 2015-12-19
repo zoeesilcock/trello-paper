@@ -35,5 +35,5 @@ describe('<Lists />', () => {
     let backButton = wrapper.find('button');
     backButton.simulate('click');
     expect(dispatchSpy.calledOnce).to.equal(true);
-  })
+  });
 });

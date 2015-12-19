@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import Card from './card';
 import { previousScroll } from '../actions/scroll';
 import { changeAll } from '../actions/card_states';
 
-class Cards extends React.Component {
+export class Cards extends React.Component {
   backHandler(event) {
     this.props.dispatch(previousScroll());
   }
@@ -26,7 +26,14 @@ class Cards extends React.Component {
         checked = this.props.cardStates.get(card.get('id'));
       }
 
-      cards.push(<Card key={index} index={index} id={card.get('id')} name={card.get('name')} checked={checked} />);
+      cards.push(
+        <Card
+          key={index}
+          index={index}
+          id={card.get('id')}
+          name={card.get('name')}
+          checked={checked} />
+      );
     });
 
     return (
@@ -43,8 +50,8 @@ class Cards extends React.Component {
 }
 
 Cards.propTypes = {
-  cards: React.PropTypes.object.isRequired,
-  cardStates: React.PropTypes.object
+  cards: PropTypes.object.isRequired,
+  cardStates: PropTypes.object
 };
 
-export default connect(null)(Cards);
+export default connect()(Cards);

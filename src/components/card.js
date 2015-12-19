@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { changeCard } from '../actions/card_states';
 
-class Card extends React.Component {
+export class Card extends React.Component {
   handleChange(event) {
     this.props.dispatch(changeCard(this.props.id, event.target.checked));
   }
@@ -18,11 +18,11 @@ class Card extends React.Component {
 };
 
 Card.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  print: React.PropTypes.bool
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  checked: PropTypes.bool
 };
 
-Card.defaultProps = { print: true };
+Card.defaultProps = { checked: true };
 
-export default connect(null)(Card);
+export default connect()(Card);
