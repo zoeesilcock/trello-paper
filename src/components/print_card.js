@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-class PrintCard extends React.Component {
+export class PrintCard extends React.Component {
   render() {
     return (
       <li>
@@ -16,11 +16,9 @@ class PrintCard extends React.Component {
 };
 
 PrintCard.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string
 };
-
-PrintCard.defaultProps = { print: true };
 
 export default PrintCard;
