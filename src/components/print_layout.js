@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { pickLayout } from '../actions/print_layout';
 
-class PrintLayout extends React.Component {
+export class PrintLayout extends React.Component {
   handleChange(event) {
     this.props.dispatch(pickLayout(event.target.value));
   }
@@ -21,7 +21,7 @@ class PrintLayout extends React.Component {
 }
 
 PrintLayout.propTypes = {
-  current: React.PropTypes.string
+  current: PropTypes.string
 };
 
-export default connect(null)(PrintLayout);
+export default connect()(PrintLayout);
