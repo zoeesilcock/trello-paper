@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 import { nextScroll } from '../actions/scroll';
 import { pickList, toggleList } from '../actions/lists';
 
-class List extends React.Component {
+export class List extends React.Component {
   handleClick(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -30,9 +30,9 @@ class List extends React.Component {
 };
 
 List.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  current: React.PropTypes.object
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  current: PropTypes.object.isRequired
 };
 
-export default connect(null)(List);
+export default connect()(List);

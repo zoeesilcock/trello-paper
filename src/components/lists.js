@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import List from './list';
 import { previousScroll } from '../actions/scroll';
 
-class Lists extends React.Component {
+export class Lists extends React.Component {
   backHandler(event) {
     this.props.dispatch(previousScroll());
   }
@@ -13,7 +13,14 @@ class Lists extends React.Component {
     var lists = [];
 
     this.props.lists.forEach((list, index) => {
-      lists.push(<List key={index} index={index} id={list.get('id')} name={list.get('name')} current={this.props.current} />);
+      lists.push(
+        <List
+          key={index}
+          index={index}
+          id={list.get('id')}
+          name={list.get('name')}
+          current={this.props.current} />
+      );
     });
 
     return (
@@ -29,8 +36,8 @@ class Lists extends React.Component {
 }
 
 Lists.propTypes = {
-  lists: React.PropTypes.object.isRequired,
-  current: React.PropTypes.object
+  lists: PropTypes.object.isRequired,
+  current: PropTypes.object
 }
 
-export default connect(null)(Lists);
+export default connect()(Lists);
