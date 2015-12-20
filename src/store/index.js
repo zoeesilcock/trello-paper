@@ -16,7 +16,7 @@ let localStorageConfig = {
 let createStoreWithMiddleware;
 
 if (__DEV__) {
-  let DevTools = require('../components/dev_tools');
+  let DevTools = require('../components/dev_tools').default;
 
   createStoreWithMiddleware = compose(
     persistState(persistedStores, localStorageConfig),

@@ -8,7 +8,7 @@ import store from './store/index';
 let devTools = '';
 
 if (__DEV__) {
-  let DevTools = require('./components/dev_tools');
+  let DevTools = require('./components/dev_tools').default;
 
   devTools = (
     <DevTools />

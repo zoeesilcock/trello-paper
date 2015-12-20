@@ -11,7 +11,12 @@ describe('<PrintCard />', () => {
   });
 
   it('renders the description of the card', () => {
-    const wrapper = shallow(<PrintCard id="1" description="It is good apparently." />);
+    const wrapper = shallow(
+      <PrintCard
+        id="1"
+        name="A jolly good card"
+        description="It is good apparently." />
+    );
     expect(wrapper.find('.description').text()).to.equal('It is good apparently.');
   });
 });
