@@ -4,7 +4,7 @@
   "description": "Bring your trello cards to real life on paper.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/.bin/karma start karma.conf.js",
     "devtest": "webpack-dev-server --port 8081 --config webpack.config.test.js"
   },
   "repository": {
@@ -36,6 +36,15 @@
     "grunt-open": "^0.2.3",
     "grunt-sftp-deploy": "^0.2.4",
     "grunt-webpack": "^1.0.11",
+    "isparta-loader": "^2.0.0",
+    "karma": "^0.13.15",
+    "karma-chai": "^0.1.0",
+    "karma-chai-sinon": "^0.1.5",
+    "karma-coverage": "^0.5.3",
+    "karma-mocha": "^0.2.1",
+    "karma-sinon": "^1.0.4",
+    "karma-spec-reporter": "0.0.23",
+    "karma-webpack": "^1.7.0",
     "mocha": "^2.3.4",
     "mocha-loader": "^0.7.1",
     "node-sass": "^3.4.2",
