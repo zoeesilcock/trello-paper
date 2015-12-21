@@ -4,7 +4,7 @@
   "description": "Bring your trello cards to real life on paper.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/.bin/karma start karma.conf.js",
     "devtest": "webpack-dev-server --port 8081 --config webpack.config.test.js"
   },
   "repository": {
