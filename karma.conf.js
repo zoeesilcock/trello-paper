@@ -12,7 +12,7 @@ module.exports = function(config) {
         ui: 'bdd'
       }
     },
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha'],
     files: [ 'test/index.js' ],
     preprocessors: { 'test/*': ['webpack'] },
     webpack: webpackConfig,
@@ -32,7 +32,6 @@ module.exports = function(config) {
       require("karma-mocha"),
       require("karma-spec-reporter"),
       require("karma-webpack"),
-      require("karma-chai"),
       require("karma-coverage")
     ]
   })
