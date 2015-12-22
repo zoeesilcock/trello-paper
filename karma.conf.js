@@ -24,7 +24,11 @@ module.exports = function(config) {
     },
     reporters: ['coverage', 'mocha'],
     coverageReporter: {
-      type: 'text'
+      dir: 'coverage',
+      reporters: [
+        { type: 'html' },
+        { type: 'text-summary' }
+      ]
     },
     autoWatch: true,
     singleRun: false,

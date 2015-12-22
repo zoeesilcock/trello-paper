@@ -4,5 +4,6 @@ bower_components/*
 .sass-cache/*
 
 public/index.js
+coverage
 
 .ftppass
