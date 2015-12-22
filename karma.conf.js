@@ -13,7 +13,7 @@ module.exports = function(config) {
       }
     },
     frameworks: ['mocha'],
-    files: [ 'test/index.js' ],
+    files: ['test/index.js'],
     preprocessors: { 'test/*': ['webpack'] },
     webpack: webpackConfig,
     webpackMiddleware: {
@@ -22,17 +22,17 @@ module.exports = function(config) {
         colors: true
       }
     },
-    reporters: ['spec', 'progress', 'coverage'],
+    reporters: ['coverage', 'mocha'],
     coverageReporter: {
       type: 'text'
     },
     autoWatch: true,
     singleRun: false,
     plugins: [
-      require("karma-mocha"),
-      require("karma-spec-reporter"),
-      require("karma-webpack"),
-      require("karma-coverage")
+      require('karma-mocha'),
+      require('karma-mocha-reporter'),
+      require('karma-webpack'),
+      require('karma-coverage')
     ]
   })
 };
