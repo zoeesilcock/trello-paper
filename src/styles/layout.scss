@@ -39,6 +39,7 @@
       @media (min-width: $break-point) {
         flex: 2 0 0;
       }
+
     }
 
     .back-button {
@@ -47,9 +48,20 @@
       padding-left: 8px;
       cursor: pointer;
 
+
       @media (min-width: $break-point) {
         display: none;
       }
+    }
+
+    &.cards .back-button {
+      left: 40px;
+    }
+
+    .all-cards-checkbox {
+      position: absolute;
+      top: 15px;
+      left: 10px;
     }
 
     .print-button {

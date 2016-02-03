@@ -5,6 +5,7 @@ import sinon from 'sinon';
 
 import { Cards } from '../../src/components/cards';
 import Card from '../../src/components/card';
+import AllCardsCheckbox from '../../src/components/all_cards_checkbox';
 
 describe('<Cards />', () => {
   let cards = fromJS([Map({ id: '1', name: 'A jolly good card' })]);
@@ -12,6 +13,11 @@ describe('<Cards />', () => {
   it('renders a h2 element', () => {
     const wrapper = shallow(<Cards cards={cards} />);
     expect(wrapper.find('h2').text()).to.equal('Cards');
+  });
+
+  it('renders a AllCardsCheckbox element', () => {
+    const wrapper = shallow(<Cards cards={cards} />);
+    expect(wrapper.find(AllCardsCheckbox)).to.have.length(1);
   });
 
   it('renders card components', () => {
