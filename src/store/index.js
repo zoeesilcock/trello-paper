@@ -25,7 +25,7 @@ if (__DEV__) {
   )(createStore);
 } else {
   createStoreWithMiddleware = compose(
-    persistState(persistedStores, { slicer: slicer }),
+    persistState(persistedStores, localStorageConfig),
     applyMiddleware(thunk)
   )(createStore);
 }
