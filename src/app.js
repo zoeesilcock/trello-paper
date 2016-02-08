@@ -114,7 +114,7 @@ function filterCards(currentLists, cards) {
 
 function filterPrintCards(cards, cardStates) {
   return cards.filter((card) => {
-    if (cardStates.get(card.id) == undefined || cardStates.get(card.id)) {
+    if (cardStates.get(card.get('id')) == undefined || cardStates.get(card.get('id'))) {
       return true;
     }
   });
